@@ -212,20 +212,26 @@ async def hello_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 
 dialog = Dialog()
 chatgpt = ChatGptService(token=CHATGPT_API_TOKEN)
-app = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
-
-app.add_handler(CommandHandler("start", start))
-app.add_handler(CommandHandler("gpt", gpt))
-app.add_handler(CommandHandler("date", date))
-app.add_handler(CommandHandler("message", message))
-app.add_handler(CommandHandler("profile", profile))
-app.add_handler(CommandHandler("opener", opener))
 
 
-app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, hello))
+def main() -> None:
+    app = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
 
-app.add_handler(CallbackQueryHandler(date_button, pattern="^date_.*"))
-app.add_handler(CallbackQueryHandler(message_button, pattern="^message_.*"))
-app.add_handler(CallbackQueryHandler(hello_buttons))
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("gpt", gpt))
+    app.add_handler(CommandHandler("date", date))
+    app.add_handler(CommandHandler("message", message))
+    app.add_handler(CommandHandler("profile", profile))
+    app.add_handler(CommandHandler("opener", opener))
 
-app.run_polling()
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, hello))
+
+    app.add_handler(CallbackQueryHandler(date_button, pattern="^date_.*"))
+    app.add_handler(CallbackQueryHandler(message_button, pattern="^message_.*"))
+    app.add_handler(CallbackQueryHandler(hello_buttons))
+
+    app.run_polling()
+
+
+if __name__ == "__main__":
+    main()
