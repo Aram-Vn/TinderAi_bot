@@ -34,7 +34,7 @@ async def send_text_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE, 
 
 # посылает в чат фото
 async def send_photo(update: Update, context: ContextTypes.DEFAULT_TYPE, name: str) -> Message:
-    with open('resources/images/' + name + ".jpg", 'rb') as photo:
+    with open('../resources/images/' + name + ".jpg", 'rb') as photo:
         return await context.bot.send_photo(chat_id=update.effective_chat.id, photo=photo)
 
 
@@ -45,15 +45,15 @@ async def show_main_menu(update: Update, context: ContextTypes.DEFAULT_TYPE, com
     await context.bot.set_chat_menu_button(menu_button=MenuButtonCommands(), chat_id=update.effective_chat.id)
 
 
-# загружает сообщение из папки  /resources/messages/
+# загружает сообщение из папки  /../resources/messages/
 def load_message(name):
-    with open("resources/messages/" + name + ".txt", "r", encoding="utf8") as file:
+    with open("../resources/messages/" + name + ".txt", "r", encoding="utf8") as file:
         return file.read()
 
 
-# загружает промпт из папки  /resources/messages/
+# загружает промпт из папки  /../resources/messages/
 def load_prompt(name):
-    with open("resources/prompts/" + name + ".txt", "r", encoding="utf8") as file:
+    with open("../resources/prompts/" + name + ".txt", "r", encoding="utf8") as file:
         return file.read()
 
 
